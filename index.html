@@ -33,9 +33,9 @@
                     </div>
                     <hr />
                     <div class="list-group">
-                        <div class="list-group-item">
-                            <span class="comment__author">Autor: <strong>Flávio</strong></span>
-                            <p>Mensagem de Teste</p>
+                        <div class="list-group-item" v-for="comment in comments">
+                            <span class="comment__author">Autor: <strong>{{ comment.name }}</strong></span>
+                            <p>{{ comment.message }}</p>
                             <div>
                                 <a href="#" title="Excluir">Excluir</a>
                             </div>
@@ -44,6 +44,16 @@
                     <hr />
                 </div>
             `,
+            data (){
+                return{
+                    comments: [
+                        {
+                            name: 'Flávio',
+                            message: 'Teste'
+                        }
+                    ]
+                }
+            }
         })
     </script>
 </body>
