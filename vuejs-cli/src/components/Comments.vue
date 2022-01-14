@@ -2,18 +2,11 @@
     <div class="container">
         <h1>Comentários</h1>
         <hr />
-        <div class="form-todo form-group">
-            <p>
-                <input placeholder="Nome" type="text" name="author" class="form-control" v-model="name" />
-            </p>
-            <p>
-                <textarea placeholder="Comentário" name="message" class="form-control" v-model="message"></textarea>
-            </p>
-            <button v-on:click="addComment" type="submit" class="btn btn-primary">Comentar</button>
-        </div>
+        <FormTodo v-on:add-todo="addComment" />
         <hr />
         <div class="list-group">
-            <div class="list-group-item" v-for="(comment, index) in allComments">
+            <p v-if="comments.length <= 0">Sem comentários...</p>
+            <div class="list-group-item" v-for="(comment, index) in allComments" v-bind:key="index">
                 <span class="comment__author">Autor: <strong>{{ comment.name }}</strong></span>
                 <p>{{ comment.message }}</p>
                 <div>
@@ -26,26 +19,20 @@
 </template>
 
 <script>
+import FormTodo from './FormTodo';
+
 export default {
+    components: {
+        FormTodo
+    },
     data (){
         return{
-            comments: [],
-            name: '',
-            message: ''
+            comments: []
         }
     },
     methods: {
-        addComment(){
-            if(this.message.trim() === '')
-                return;
-    
-            this.comments.push({
-                name: this.name,
-                message: this.message
-            });
-    
-            this.name = '';
-            this.message = '';
+        addComment(comment){
+            this.comments.push(comment);
         },
         removeComment(index){
             this.comments.splice(index, 1);
