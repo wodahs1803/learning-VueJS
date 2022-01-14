@@ -55,7 +55,7 @@
                 addComment(){
                     if(this.message.trim() === '')
                         return;
-                    console.log("Adicionou comentário");
+
                     this.comments.push({
                         name: this.name,
                         message: this.message
@@ -74,6 +74,11 @@
                         ...comment,
                         name: comment.name.trim() === '' ? 'Anônimo' : comment.name
                     }))
+                }
+            },
+            watch: {
+                comments(val){
+                    console.log('Val',val);
                 }
             }
         })
